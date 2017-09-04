@@ -43,6 +43,21 @@ You can post JSON data to this endpoint, to add new data to a device.
 
 ## Development
 
+### Requirements
+
+You need these tools before you can develop this locally:
+
+- MongoDB Server (can also be a remote server)
+- Node
+- Yarn
+- An Google Client ID and Secret
+
+You can generate a Google Client ID and Secret by navigating to https://console.developers.google.com/apis/credentials/oauthclient, selecting 'web application' and entering http://localhost/auth/google/callback in the _Authorized redirect URIs_.
+
+Also, you need to enable the Google Plus API in order for the authentication to work.
+
+### Run
+
 If you want to locally setup this repository, clone it and run `yarn`.
 
 Create an `.env` file in the root of the project with the following contents:
@@ -52,7 +67,6 @@ PORT=3000
 GOOGLE_CLIENT_ID=8950558...
 GOOGLE_CLIENT_SECRET=PHfg...
 ```
-
-You can generate a Google Client ID and Secret by navigating to https://console.developers.google.com/apis/credentials/oauthclient, selecting 'web application' and entering http://localhost/auth/google/callback in the _Authorized redirect URIs_.
+Of course, change the MongoDB url and Google Client details to your own.
 
 After that, run `yarn start` and navigate to http://localhost:3000.
