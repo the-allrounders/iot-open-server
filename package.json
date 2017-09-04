@@ -25,7 +25,8 @@
     "start": "babel-watch src/wrapper.js",
     "heroku-postbuild": "npm run build",
     "build": "babel src --out-dir lib --copy-files",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "echo No tests at this moment."
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
