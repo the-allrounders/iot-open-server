@@ -7,8 +7,8 @@ const user = new Schema({
   name: String,
 });
 
-user.post('findOneAndUpdate', async user => {
-  if(!await Device.count({ user: user.id}).exec()) {
+user.post('findOneAndUpdate', async (user) => {
+  if (!await Device.count({ user: user.id }).exec()) {
     const token = (await crypto.randomBytes(12)).toString('hex');
     const device = new Device({
       user: user.id,
@@ -22,8 +22,8 @@ user.post('findOneAndUpdate', async user => {
         {
           key: 'text',
           type: 'text',
-        }
-      ]
+        },
+      ],
     });
     device.save();
   }
