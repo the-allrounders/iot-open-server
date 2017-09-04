@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import Device from './database/Device';
 import DataEntry from './database/DataEntry';
 import passport, { authenticated } from './passport';
+import admin from './admin';
 
 const MongoStore = connectMongo(session);
 
@@ -18,6 +19,7 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport);
 
@@ -62,9 +64,8 @@ app.post('/data', async (req, res) => {
   return res.status(200).end();
 });
 
-app.get('/', authenticated, async ({ user }, res) => {
-  const device = await Device.findOne({ user: user.id }).exec();
-  res.send(`Hi ${user.name}! ${device ? `Your device ID is <code>${device.token}</code>` : 'Please refresh to see your Device ID'}`);
-});
+app.get('/', authenticated, async (req, res) => res.redirect('/admin'));
+
+app.use('/admin', authenticated, admin);
 
 export default app;

@@ -7,6 +7,8 @@ const dataEntry = new Schema({
     key: { type: String, required: true },
     value: { type: Schema.Types.Mixed, required: true },
   }],
+}, {
+  timestamps: true,
 });
 
 export default mongoose.model('DataEntry', dataEntry);

@@ -1,33 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
-import crypto from 'crypto';
-import Device from './Device';
 
 const user = new Schema({
   googleId: String,
   name: String,
-});
-
-// eslint-disable-next-line no-shadow
-user.post('findOneAndUpdate', async (user) => {
-  if (!await Device.count({ user: user.id }).exec()) {
-    const token = (await crypto.randomBytes(12)).toString('hex');
-    const device = new Device({
-      user: user.id,
-      name: user.name,
-      token,
-      dataTypes: [
-        {
-          key: 'number',
-          type: 'number',
-        },
-        {
-          key: 'text',
-          type: 'text',
-        },
-      ],
-    });
-    device.save();
-  }
+}, {
+  timestamps: true,
 });
 
 export default mongoose.model('User', user);
