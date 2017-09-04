@@ -40,3 +40,19 @@ You can post JSON data to this endpoint, to add new data to a device.
     ]
   }
 ```
+
+## Development
+
+If you want to locally setup this repository, clone it and run `yarn`.
+
+Create an `.env` file in the root of the project with the following contents:
+```
+MONGODB_URI=mongodb://localhost/iot
+PORT=3000
+GOOGLE_CLIENT_ID=8950558...
+GOOGLE_CLIENT_SECRET=PHfg...
+```
+
+You can generate a Google Client ID and Secret by navigating to https://console.developers.google.com/apis/credentials/oauthclient, selecting 'web application' and entering http://localhost/auth/google/callback in the _Authorized redirect URIs_.
+
+After that, run `yarn start` and navigate to http://localhost:3000.
