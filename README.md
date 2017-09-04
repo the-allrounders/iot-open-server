@@ -1,6 +1,9 @@
 # iot-open-server
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/the-allrounders/iot-open-server.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/the-allrounders/iot-open-server.svg?branch=master)](https://travis-ci.org/the-allrounders/iot-open-server)
+[![dependencies Status](https://david-dm.org/the-allrounders/iot-open-server/status.svg)](https://david-dm.org/the-allrounders/iot-open-server)
+
 The Internet of Things open webserver.
 
 ## Create devices
