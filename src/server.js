@@ -1,13 +1,22 @@
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
+import connectMongo from 'connect-mongo';
+import mongoose from 'mongoose';
 import Device from './database/Device';
 import DataEntry from './database/DataEntry';
 import passport, { authenticated } from './passport';
 
+const MongoStore = connectMongo(session);
+
 const app = express();
 app.set('trust proxy');
-app.use(session({ secret: 'aisdfoyasudbv;aosdn', resave: false, saveUninitialized: false }));
+app.use(session({
+  secret: 'aisdfoyasudbv;aosdn',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}));
 app.use(bodyParser.json());
 
 app.use(passport);
