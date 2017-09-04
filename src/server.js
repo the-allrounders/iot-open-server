@@ -1,8 +1,8 @@
 import express from 'express';
-import Device from './database/Device';
 import session from 'express-session';
-import DataEntry from './database/DataEntry';
 import bodyParser from 'body-parser';
+import Device from './database/Device';
+import DataEntry from './database/DataEntry';
 import passport, { authenticated } from './passport';
 
 const app = express();

@@ -1,12 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
-import Device from './Device';
 import crypto from 'crypto';
+import Device from './Device';
 
 const user = new Schema({
   googleId: String,
   name: String,
 });
 
+// eslint-disable-next-line no-shadow
 user.post('findOneAndUpdate', async (user) => {
   if (!await Device.count({ user: user.id }).exec()) {
     const token = (await crypto.randomBytes(12)).toString('hex');

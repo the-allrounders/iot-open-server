@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
-import User from './database/User';
 import { Strategy } from 'passport-google-oauth20';
+import User from './database/User';
 
 const middleware = express();
 
@@ -48,7 +48,7 @@ const authenticated = (req, res, next) => {
   if (!req.user) {
     return res.redirect('/auth/google');
   }
-  next();
+  return next();
 };
 
 export default middleware;
