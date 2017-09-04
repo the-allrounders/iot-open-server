@@ -59,9 +59,11 @@ app.get('/data', async (req,res) => {
     delete u.dataTypes;
     delete u.token;
     const data = await DataEntry.findOne({device: u._id}).exec();
-    u.data.forEach(dataType => {
-      dataType.value = data.data.find(d => d.key === dataType.key).value;
-    });
+    if(data) {
+      u.data.forEach(dataType => {
+        dataType.value = data.data.find(d => d.key === dataType.key).value;
+      });
+    }
   }));
 
   res.json({devices});
