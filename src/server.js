@@ -34,6 +34,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 const app = express();
+app.set('trust proxy');
 app.use(session({secret: 'aisdfoyasudbv;aosdn', resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
