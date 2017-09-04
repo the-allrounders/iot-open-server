@@ -1,4 +1,6 @@
 # iot-open-server
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/the-allrounders/iot-open-server.svg)](https://greenkeeper.io/)
 The Internet of Things open webserver.
 
 ## Create devices
