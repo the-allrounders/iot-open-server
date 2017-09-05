@@ -27,16 +27,31 @@ app.get('/data', async (req, res) => {
   const devices = (await Device.find().exec())
     .map(u => u.toObject());
 
-  await Promise.all(devices.map(async (u) => {
-    u.data = u.dataTypes;
-    delete u.dataTypes;
-    delete u.token;
-    const data = await DataEntry.findOne({ device: u._id }).exec();
-    if (data) {
-      u.data.forEach((dataType) => {
-        dataType.value = data.data.find(d => d.key === dataType.key).value;
-      });
-    }
+  await Promise.all(devices.map(async (device) => {
+    device.data = await Promise.all(device.dataTypes.map(async (dataType) => {
+      const lastDataEntry = await DataEntry.findOne({
+        device: device._id,
+        data: {
+          $elemMatch: {
+            key: dataType.key,
+          },
+        },
+      }).sort({ createdAt: -1 }).exec();
+      if (lastDataEntry) {
+        dataType.value = lastDataEntry.data.find(data => data.key === dataType.key).value;
+        dataType.updatedAt = lastDataEntry.createdAt;
+      }
+      return dataType;
+    }));
+    delete device.dataTypes;
+    delete device.token;
+
+    // const data = await DataEntry.findOne({ device: device._id }).exec();
+    // if (data) {
+    //   device.data.forEach((dataType) => {
+    //     dataType.value = data.data.find(d => d.key === dataType.key).value;
+    //   });
+    // }
   }));
 
   res.json({ devices });
