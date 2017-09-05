@@ -1,23 +1,30 @@
 export default ({ devices, baseUrl }) => `
-  <a href='${baseUrl}/device/add'><button>Add device</button></a>
+  
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">Devices</li>
+  </ol>
+  
   <h1>Devices</h1>
   <table class='table'>
     <thead>
-    <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th colspan='2'>Operations</th>
-    </tr>
+      <tr>
+        <th>Name</th>
+        <th>Token</th>
+        <th>Operations</th>
+      </tr>
     </thead>
     <tbody>
-    ${devices.map(device => `
+      ${devices.map(device => `
         <tr>
-            <td>${device.id}</td>
-            <td>${device.name}</td>
-            <td><a href='${baseUrl}/device/${device.id}'>Edit</a></td>
-            <td><a href='${baseUrl}/device/${device.id}/delete'>Delete</a></td>
+          <td>${device.name}</td>
+          <td>${device.token}</td>
+          <td>
+            <a href='${baseUrl}/device/${device.id}' class='btn btn-primary'>Edit</a>
+            <a href='${baseUrl}/device/${device.id}/delete' class='btn btn-danger'>Delete</a>
+          </td>
         </tr>
-    `).join('')}
-  </tbody>
-</table>
-`
+      `).join('')}
+    </tbody>
+  </table>
+  <a href='${baseUrl}/device/add' class='btn btn-primary btn-raised'>Add device</a>
+`;

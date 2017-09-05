@@ -1,42 +1,49 @@
 export default ({ device, baseUrl }) => `
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="${baseUrl}">Devices</a></li>
+    <li class="breadcrumb-item active">${device.name}</li>
+  </ol>
+  
   <form method='post' action='${baseUrl}/device/${device._id}'>
-    <fieldset>
-      <label for='name'>
-          Name:
-          <input id='name' name='name' value='${device.name}'>
-      </label>
-      <br/>
-      <label for='latitude'>
-          Latitude:
-          <input id='latitude' name='location[latitude]' value='${device.location.latitude || ''}'>
-      </label>
-      <br/
-      <label for='longitude'>
-          Longitude:
-          <input id='longitude' name='location[longitude]' value='${device.location.longitude || ''}'>
-      </label>
-      <br/
-      <label>
-          <br/><br/>
-          Data:
-          ${device.dataTypes.map((entry, key) => `
-              <br/><br/>
-              <label for='data-label-${key}'>
-                  Label
-                  <input id='data-label-${key}' name='dataTypes[${key}][label]' value='${entry.label || ''}'>
-              </label>
-              <label for='data-key-${key}'>
-                  Key
-                  <input id='data-key-${key}' name='dataTypes[${key}][key]' value='${entry.key || ''}'>
-              </label>
-              <label for='data-type-${key}'>
-                  Type
-                  <input id='data-type-${key}' name='dataTypes[${key}][type]' value='${entry.type || ''}'>
-              </label>
-          `).join('')}
-      </label>
-      </fieldset>
-    <button name='submit'>Save and go back</button>
-    <button name='submitEdit' value='true'>Save</button>
+    <legend>Device</legend>
+    <div class="form-group row">
+      <label for='name' class="col-2 col-form-label">Device name</label>
+      <div class="col-10">
+        <input id='name' name='name' value='${device.name}' class="form-control">
+      </div>
+    </div>
+    <legend>Location of the device</legend>
+    <div class="form-group row">
+       <label for="latitude" class="col-2 col-form-label">Latitude</label>
+       <div class="col-10">
+         <input id='latitude' name='location[latitude]' value='${device.location.latitude || ''}' class="form-control">
+       </div>
+    </div>
+    <div class="form-group row">
+       <label for="latitude" class="col-2 col-form-label">Longitude</label>
+       <div class="col-10">
+         <input id='latitude' name='location[longitude]' value='${device.location.longitude || ''}' class="form-control">
+       </div>
+    </div>
+    <legend>Data types</legend>
+    <div class="form-group row">
+      <label class="col-3 col-form-label">Key</label>
+      <label class="col-3 col-form-label">Label</label>
+      <label class="col-3 col-form-label">Type</label>
+    </div>
+      ${device.dataTypes.map((entry, key) => `
+        <div class="form-group row">
+          <div class="col-3">
+            <input name='dataTypes[${key}][key]' value='${entry.key || ''}' placeholder="Key">
+          </div>
+          <div class="col-3">
+            <input name='dataTypes[${key}][label]' value='${entry.label || ''}' placeholder="Label">
+          </div>
+          <div class="col-3">
+            <input name='dataTypes[${key}][type]' value='${entry.type || ''}' placeholder="Type">
+          </div>
+        </div>
+      `).join('')}
+    <button name='submitEdit' value='true' class="btn btn-raised btn-primary">Save</button>
   </form>
 `
