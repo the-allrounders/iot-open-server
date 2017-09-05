@@ -41,8 +41,18 @@ export default ({ device, baseUrl }) => `
           </div>
           <div class="col-3">
             <select name='dataTypes[${key}][type]' class="form-control">
-              <option value="number" ${entry.type === 'number' ? 'selected' : ''}>Generic number</option>
-              <option value="text" ${entry.type === 'text' ? 'selected' : ''}>Generic text</option>
+              <option disabled ${entry.type ? '' : 'selected'}> -- Select a type --</option>
+              <option disabled></option>
+              <option disabled>Special types</option>
+              <option value="temperature" ${entry.type === 'temperature' ? 'selected' : ''}>Temperature (in Celsius)</option>
+              <option value="humidity" ${entry.type === 'humidity' ? 'selected' : ''}>Humidity (in decimals)</option>
+              <option value="windforce" ${entry.type === 'windforce' ? 'selected' : ''}>Windforce (in km/h)</option>
+              <option disabled></option>
+              <option disabled>Generic types</option>
+              <option value="number" ${entry.type === 'number' ? 'selected' : ''}>Number</option>
+              <option value="text" ${entry.type === 'text' ? 'selected' : ''}>Text</option>
+              <option value="boolean" ${entry.type === 'boolean' ? 'selected' : ''}>Boolean</option>
+              
             </select>
           </div>
         </div>
