@@ -3,6 +3,7 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import Device from './database/Device';
 import DataEntry from './database/DataEntry';
 import passport, { authenticated } from './passport';
@@ -20,6 +21,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(passport);
 
