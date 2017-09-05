@@ -34,13 +34,16 @@ export default ({ device, baseUrl }) => `
       ${device.dataTypes.map((entry, key) => `
         <div class="form-group row">
           <div class="col-3">
-            <input name='dataTypes[${key}][key]' value='${entry.key || ''}' placeholder="Key">
+            <input name='dataTypes[${key}][key]' value='${entry.key || ''}' placeholder="Key" class="form-control">
           </div>
           <div class="col-3">
-            <input name='dataTypes[${key}][label]' value='${entry.label || ''}' placeholder="Label">
+            <input name='dataTypes[${key}][label]' value='${entry.label || ''}' placeholder="Label" class="form-control">
           </div>
           <div class="col-3">
-            <input name='dataTypes[${key}][type]' value='${entry.type || ''}' placeholder="Type">
+            <select name='dataTypes[${key}][type]' class="form-control">
+              <option value="number" ${entry.type === 'number' ? 'selected' : ''}>Generic number</option>
+              <option value="text" ${entry.type === 'text' ? 'selected' : ''}>Generic text</option>
+            </select>
           </div>
         </div>
       `).join('')}
