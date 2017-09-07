@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import { Strategy } from 'passport-google-oauth20';
-import User from './database/User';
+import User from '../database/User';
 
 const middleware = express();
 

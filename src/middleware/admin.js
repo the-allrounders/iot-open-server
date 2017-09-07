@@ -1,8 +1,8 @@
 import express from 'express';
-import Device from './database/Device';
-import formTemplate from './templates/form';
-import listTemplate from './templates/list';
-import template from './templates/template';
+import Device from '../database/Device';
+import formTemplate from '../templates/form';
+import listTemplate from '../templates/list';
+import template from '../templates/template';
 
 const middleware = express();
 
