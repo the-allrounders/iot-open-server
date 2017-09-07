@@ -45,7 +45,7 @@ export default ({ device, baseUrl }) => `
               <option disabled></option>
               <option disabled>Special types</option>
               <option value="temperature" ${entry.type === 'temperature' ? 'selected' : ''}>Temperature (in Celsius)</option>
-              <option value="humidity" ${entry.type === 'humidity' ? 'selected' : ''}>Humidity (in decimals)</option>
+              <option value="humidity" ${entry.type === 'humidity' ? 'selected' : ''}>Humidity (in percentage)</option>
               <option value="windforce" ${entry.type === 'windforce' ? 'selected' : ''}>Windforce (in km/h)</option>
               <option disabled></option>
               <option disabled>Generic types</option>
