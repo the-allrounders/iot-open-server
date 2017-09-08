@@ -17,7 +17,7 @@ app.get('/data', async (req, res) => {
             key: dataType.key,
           },
         },
-      }).sort({ createdAt: -1 }).exec();
+      }).sort({ _id: -1 }).exec();
       if (lastDataEntry) {
         dataType.value = lastDataEntry.data.find(data => data.key === dataType.key).value;
         dataType.updatedAt = lastDataEntry.createdAt;
