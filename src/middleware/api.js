@@ -17,7 +17,7 @@ app.get('/data', async (req, res) => {
             key: dataType.key,
           },
         },
-      }).sort({ createdAt: -1 }).exec();
+      }).sort({ _id: -1 }).exec();
       if (lastDataEntry) {
         dataType.value = lastDataEntry.data.find(data => data.key === dataType.key).value;
         dataType.updatedAt = lastDataEntry.createdAt;
@@ -31,6 +31,27 @@ app.get('/data', async (req, res) => {
   }));
 
   res.json({ devices });
+});
+
+app.get('/data/:deviceId/:key', async (req, res) => {
+  const dataEntries = await DataEntry
+    .find({
+      device: req.params.deviceId,
+      data: {
+        $elemMatch: {
+          key: req.params.key,
+        },
+      },
+    })
+    .sort({ createdAt: -1 })
+    .exec();
+
+  res.json(dataEntries
+    .map(({ _id, createdAt, data }) => ({
+      _id,
+      createdAt,
+      value: data.find(d => d.key === req.params.key).value,
+    })));
 });
 
 app.post('/data', async (req, res) => {
