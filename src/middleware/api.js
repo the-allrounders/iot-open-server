@@ -33,6 +33,27 @@ app.get('/data', async (req, res) => {
   res.json({ devices });
 });
 
+app.get('/data/:deviceId/:key', async (req, res) => {
+  const dataEntries = await DataEntry
+    .find({
+      device: req.params.deviceId,
+      data: {
+        $elemMatch: {
+          key: req.params.key,
+        },
+      },
+    })
+    .sort({ createdAt: -1 })
+    .exec();
+
+  res.json(dataEntries
+    .map(({ _id, createdAt, data }) => ({
+      _id,
+      createdAt,
+      value: data.find(d => d.key === req.params.key).value,
+    })));
+});
+
 app.post('/data', async (req, res) => {
   // Check if valid request
   if (typeof req.body.token !== 'string' || !Array.isArray(req.body.data) || req.body.data.length === 0) {
