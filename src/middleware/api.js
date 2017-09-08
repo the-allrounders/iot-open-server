@@ -45,6 +45,27 @@ app.post('/data', async (req, res) => {
     return res.status(400).end();
   }
 
+  device.dataTypes.map((dataType) => {
+    var input = req.body.data;
+    var foundDataTypes = input.filter(function(item){
+      return item.key === dataType.key;
+    });
+
+    var inputAccepted = foundDataTypes.map((item) => {
+      switch(dataType.type) {
+        case 'temperature':
+        case 'number':
+        case 'humidity':
+        case 'windforce':
+          return typeof(item.value) === 'number' || typeof(item.value) === 'number';
+        case 'boolean':
+          return typeof(item.value) === 'boolean';
+        case 'text':
+          return typeof(item.value) === 'string';
+      }
+    });
+  });
+
   const dataEntry = new DataEntry({
     device: device.id,
     data: req.body.data,
