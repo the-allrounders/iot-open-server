@@ -81,7 +81,7 @@ app.get('/actuator/:token', async (req, res) => {
     token: req.params.token
   }).exec();
 
-  if(device && device.actuator) {
+  if(device && device.actuator != "") {
     return res.json({"trigger": device.actuator});
   }
 
