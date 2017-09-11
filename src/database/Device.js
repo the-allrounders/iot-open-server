@@ -6,7 +6,7 @@ const token = () => (crypto.randomBytes(12)).toString('hex');
 const device = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   name: { type: String, required: true },
-  actuator: { type: Boolean, required: false, default: false},
+  actuator: { type: String, required: false, default: ""},
   location: {
     latitude: Number,
     longitude: Number,
