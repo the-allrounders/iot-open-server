@@ -76,4 +76,28 @@ app.post('/data', async (req, res) => {
   return res.status(200).end();
 });
 
+app.get('/actuator/:id', async (req, res) => {
+  const device = await Device.findOne({ _id: req.params.id }).exec();
+
+  if (device && device.actuator !== '') {
+    return res.json({ trigger: device.actuator });
+  }
+
+  // When there is no trigger, always return false
+  return res.json({ trigger: false });
+});
+
+app.post('/actuator/:id', async (req, res) => {
+  const device = await Device.update({
+    _id: req.params.id,
+  }, {
+    $set: { actuator: req.body.actuator },
+  }).exec();
+  if (device) {
+    return res.status(200).end();
+  }
+
+  return res.status(400).end();
+});
+
 export default app;

@@ -59,4 +59,4 @@ export default ({ device, baseUrl }) => `
       `).join('')}
     <button name='submitEdit' value='true' class="btn btn-raised btn-primary">Save</button>
   </form>
-`
+`;

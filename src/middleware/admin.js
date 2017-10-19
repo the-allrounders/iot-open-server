@@ -7,7 +7,7 @@ import template from '../templates/template';
 const middleware = express();
 
 function getDevicesByUserId(user) {
-  return Device.find({ user }).sort({ updatedAt: -1}).exec();
+  return Device.find({ user }).sort({ updatedAt: -1 }).exec();
 }
 
 middleware.get('/', async ({ user, baseUrl }, res) => {
@@ -62,16 +62,16 @@ middleware.post('/device/:deviceId', async ({ user, params, body, baseUrl }, res
     user: user._id,
     _id: params.deviceId,
   }, update).exec();
-  if(body.submitEdit === 'true') {
-    res.redirect(baseUrl + '/device/' + params.deviceId);
+  if (body.submitEdit === 'true') {
+    res.redirect(`${baseUrl}/device/${params.deviceId}`);
   } else {
-    res.redirect(baseUrl + '/');
+    res.redirect(`${baseUrl}/`);
   }
 });
 
 middleware.get('/device/:deviceId/delete', async ({ user, params, baseUrl }, res) => {
   await Device.remove({ user: user._id, _id: params.deviceId }).exec();
-  res.redirect(baseUrl + '/');
+  res.redirect(`${baseUrl}/`);
 });
 
 export default middleware;
