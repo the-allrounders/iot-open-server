@@ -94,7 +94,10 @@ app.post('/actuator/:id', async (req, res) => {
     $set: { actuator: req.body.actuator },
   }).exec();
   if (device) {
-    return res.status(200).end();
+    return res.status(200).json({
+      message: 'OK',
+      actuator: req.body.actuator,
+    });
   }
 
   return res.status(400).end();
