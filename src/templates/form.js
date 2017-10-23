@@ -52,6 +52,7 @@ export default ({ device, baseUrl }) => `
               <option value="number" ${entry.type === 'number' ? 'selected' : ''}>Number</option>
               <option value="text" ${entry.type === 'text' ? 'selected' : ''}>Text</option>
               <option value="boolean" ${entry.type === 'boolean' ? 'selected' : ''}>Boolean</option>
+              <option value="image_url" ${entry.type === 'image_url' ? 'selected' : ''}>Image URL</option>
               
             </select>
           </div>
