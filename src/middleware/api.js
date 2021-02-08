@@ -66,6 +66,35 @@ app.post('/data', async (req, res) => {
     return res.status(400).end();
   }
 
+  for(var dataType of device.dataTypes){
+    var input = req.body.data;
+    var matchedDataType = input.find(function(item){
+      return item.key === dataType.key;
+    });
+
+    var inputAccepted = true;
+    
+    switch(dataType.type) {
+      case 'temperature':
+      case 'humidity':
+      case 'windforce':
+      case 'number':
+        inputAccepted = typeof(matchedDataType.value) === 'number';
+        break;
+      case 'boolean':
+        inputAccepted = typeof(matchedDataType.value) === 'boolean';
+        break;
+      case 'text':
+        inputAccepted = typeof(matchedDataType.value) === 'string';
+        break;
+    }
+
+    if(!inputAccepted){
+      console.log(matchedDataType, dataType)
+      return res.status(400).send(dataType.key + " must be of type " + dataType.type);
+    }
+  };
+
   const dataEntry = new DataEntry({
     device: device.id,
     data: req.body.data,
